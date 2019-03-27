@@ -7,6 +7,7 @@ import vo.Contato;
 
 public class Agenda {
 
+	//teste
 	private static List<Contato> agenda = new ArrayList<>();
 	private static List<String> operadoras = new ArrayList<>();
 
