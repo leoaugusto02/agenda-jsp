@@ -28,7 +28,7 @@ public class OperadoraDAO {
 		while(rs.next()){
 			Operadora op = new Operadora();
 			op.setCodOperadora(rs.getInt("cod_operadora"));
-			op.setCodigo(rs.getInt("codigo"));
+			op.setCodigo(rs.getString("codigo"));
 			op.setNome(rs.getString("nome"));
 			
 			operadoras.add(op);

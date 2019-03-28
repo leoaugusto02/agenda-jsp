@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Agenda;
 import controller.Mensagem;
+import dao.ContatoDAO;
 import vo.Contato;
 import vo.Operadora;
 
@@ -27,14 +29,19 @@ public class ProcessaContato extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Contato p = new Contato();
-		p.setNome(request.getParameter("nome"));
-		p.setTelefone(request.getParameter("telefone"));
-		Operadora op = new Operadora();
-		op.setNome(request.getParameter("operadora"));
-		p.setOperadora(op);
+		Operadora o = new Operadora();
+		ContatoDAO cDao = new ContatoDAO();
+		Contato c = new Contato();
 		
-		Agenda.getAgenda().add(p);
+		c.setNome(request.getParameter("nome"));
+		c.setTelefone(request.getParameter("telefone"));
+		o.setCodigo(request.getParameter("operadora"));
+		
+		try {
+			cDao.inserir(c);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		Mensagem.addMensagem("Contato salvo com sucesso");
 		
@@ -43,15 +50,3 @@ public class ProcessaContato extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-

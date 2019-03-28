@@ -1,3 +1,4 @@
+<%@page import="dao.ContatoDAO"%>
 <%@page import="vo.Operadora"%>
 <%@page import="dao.OperadoraDAO"%>
 <%@page import="controller.Mensagem"%>
@@ -52,10 +53,11 @@
 					<%
 						//recupera a lista
 						OperadoraDAO oDao = new OperadoraDAO();
+						Operadora ope = new Operadora();
 						List<Operadora> op = oDao.listarTodas();
 						//percorre a lista preenchendo as opções do select
 						for(Operadora o : op){
-							out.print("<option>" + o.getNome() + "</option>");
+							out.print("<option values='" + ope.getCodigo() +"'>" + o.getNome() + "</option>");
 						}
 					%>
 				  </select>
@@ -101,26 +103,28 @@
 			</thead>
 			<tbody>
 				<%
-					List<Contato> lista = Agenda.getAgenda();
+					ContatoDAO cDao = new ContatoDAO();
+				
+					List<Contato> lista = cDao.listarTodos();
 					if (lista.isEmpty()) {
 						out.print("<tr><td colspan=3>Não há contatos</td></tr>");
 					}
-					for (Contato p : lista) {
+					for (Contato c : lista) {
 				%>
 				<tr>
 					<td>
 						<%
-							out.print(p.getNome());
+							out.print(c.getNome());
 						%>
 					</td>
 					<td>
 						<%
-							out.print(p.getTelefone());
+							out.print(c.getTelefone());
 						%>
 					</td>
 					<td>
 						<%
-							out.print(p.getOperadora().getNome());
+							out.print(c.getOperadora().getNome());
 						%>
 					</td>
 				</tr>
