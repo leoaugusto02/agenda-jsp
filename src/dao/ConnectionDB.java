@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionDB {
 
 	// declara as variáveis de conexão
-	private static String dns = "jdbc:mysql://localhost:3306/aula_banco";
+	private static String dns = "jdbc:mysql://localhost:3306/agenda";
 	private static String usuario = "root";
 	private static String senha = "";
 

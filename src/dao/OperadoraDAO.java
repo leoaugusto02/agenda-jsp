@@ -30,6 +30,8 @@ public class OperadoraDAO {
 			op.setCodOperadora(rs.getInt("cod_operadora"));
 			op.setCodigo(rs.getInt("codigo"));
 			op.setNome(rs.getString("nome"));
+			
+			operadoras.add(op);
 		}
 		return operadoras;
 	}

@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +30,11 @@ public class ProcessaOperadora extends HttpServlet {
 		String operadora = request.getParameter("operadora");
 		
 		if(operadora != null){
-			Agenda.getOperadoras().add(operadora);
+			try {
+				Agenda.getOperadoras().add(operadora);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		Mensagem.addMensagem("Operadora Adicionada com Sucesso");
